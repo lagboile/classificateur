@@ -12,12 +12,19 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk import pos_tag, SnowballStemmer
+from pathlib import Path
 
-file_path = "C:\\Users\\LENOVO\\Project_final\\file.json"
+script_dir = Path(__file__).parent
 
-with open(file_path, 'r', encoding='utf-8') as f:
-    data = json.load(f)
-    df = pd.DataFrame(data)
+file_path = script_dir / 'file.json'
+
+if file_path.exists():
+    with open(file_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+        df = pd.DataFrame(data)
+else:
+    print(f"Le fichier {file_path} n'a pas été trouvé.")
+    exit(1)
 
 df['tokens'] = df['question'].apply(word_tokenize)
 
