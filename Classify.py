@@ -1,8 +1,6 @@
 import re
-
 import nltk
 from streamlit import button
-
 nltk.download('punkt', quiet=True)
 nltk.download('stopwords', quiet=True)
 nltk.download('wordnet', quiet=True)
