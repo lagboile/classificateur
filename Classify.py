@@ -1,6 +1,5 @@
 import re
 import nltk
-from streamlit import button
 nltk.download('punkt', quiet=True)
 nltk.download('stopwords', quiet=True)
 nltk.download('wordnet', quiet=True)
@@ -132,12 +131,11 @@ if user_input:
 
     user_input = re.sub(r'[^\w\s]', '', user_input.lower())
 
-    if st.button("Enter"):
-        category = get_category(user_input)
+    category = get_category(user_input)
 
-        if category:
+    if category:
             st.write(f"le service concerne est: {category} ")
-        else :
+    else :
             st.write("Chatbot: Sorry, I don't understand your question..")
 
 
