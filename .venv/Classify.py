@@ -1,11 +1,10 @@
-import re
+lsimport re
 import nltk
 from streamlit import button
 nltk.download('punkt', quiet=True)
 nltk.download('stopwords', quiet=True)
 nltk.download('wordnet', quiet=True)
 nltk.download('averaged_perceptron_tagger_eng', quiet=True)
-nltk.data.path.append('C:\\Users\\LENOVO\\nltk_data')
 import streamlit as st
 import pandas as pd
 import json
@@ -14,14 +13,6 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk import pos_tag, SnowballStemmer
 from pathlib import Path
-
-try:
-    nltk.data.find('tokenizers/punkt')
-    print("Punkt est accessible.")
-except LookupError:
-    print("Punkt n'est pas accessible.")
-
-    nltk.download('punkt')
 
 script_dir = Path(__file__).parent
 
