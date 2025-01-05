@@ -8,11 +8,12 @@ nltk.data.path.append('C:\\Users\\LENOVO\\nltk_data')
 import streamlit as st
 import pandas as pd
 import json
-from nltk.tokenize import word_tokenize
+import os
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk import pos_tag, SnowballStemmer
 from pathlib import Path
+
 
 script_dir = Path(__file__).parent
 
@@ -27,12 +28,38 @@ else:
     exit(1)
 file_path = script_dir / 'file.json'
 
-try:
-    nltk.data.find('tokenizers/punkt')
-    print("Punkt est accessible.")
-except LookupError:
-    print("Punkt n'est pas accessible.")
-    nltk.download('punkt')
+import nltk
+from nltk.data import find
+from nltk.tokenize import word_tokenize
+
+def download_nltk_resources():
+    nltk_data_dir = os.path.join(os.getcwd(), "nltk_data")
+
+    if not os.path.exists(nltk_data_dir):
+        os.makedirs(nltk_data_dir)
+
+    os.environ['NLTK_DATA'] = nltk_data_dir
+    try:
+        find('tokenizers/punkt')
+    except LookupError:
+        print("Téléchargement de 'punkt' en cours...")
+        nltk.download('punkt', download_dir=nltk_data_dir)
+    try:
+        find('corpora/stopwords')
+    except LookupError:
+        print("Téléchargement des stopwords en cours...")
+        nltk.download('stopwords', download_dir=nltk_data_dir)
+    try:
+        find('corpora/wordnet')
+    except LookupError:
+        print("Téléchargement de 'wordnet' en cours...")
+        nltk.download('wordnet', download_dir=nltk_data_dir)
+    try:
+        find('taggers/averaged_perceptron_tagger')
+    except LookupError:
+        print("Téléchargement du 'averaged_perceptron_tagger' en cours...")
+        nltk.download('averaged_perceptron_tagger', download_dir=nltk_data_dir)
+download_nltk_resources()
 
 df['tokens'] = df['question'].apply(word_tokenize)
 
