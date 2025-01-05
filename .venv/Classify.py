@@ -1,4 +1,4 @@
-lsimport re
+import re
 import nltk
 from streamlit import button
 nltk.download('punkt', quiet=True)
