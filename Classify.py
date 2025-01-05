@@ -14,14 +14,6 @@ from nltk.stem import WordNetLemmatizer
 from nltk import pos_tag, SnowballStemmer
 from pathlib import Path
 
-try:
-    nltk.data.find('tokenizers/punkt')
-    print("Punkt est accessible.")
-except LookupError:
-    print("Punkt n'est pas accessible.")
-
-    nltk.download('punkt')
-
 script_dir = Path(__file__).parent
 
 file_path = script_dir / 'file.json'
@@ -33,6 +25,12 @@ if file_path.exists():
 else:
     print(f"Le fichier {file_path} n'a pas été trouvé.")
     exit(1)
+try:
+    nltk.data.find('tokenizers/punkt')
+    print("Punkt est accessible.")
+except LookupError:
+    print("Punkt n'est pas accessible.")
+    nltk.download('punkt')
 
 df['tokens'] = df['question'].apply(word_tokenize)
 
