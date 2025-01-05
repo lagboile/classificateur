@@ -25,6 +25,8 @@ if file_path.exists():
 else:
     print(f"Le fichier {file_path} n'a pas été trouvé.")
     exit(1)
+file_path = script_dir / 'file.json'
+
 try:
     nltk.data.find('tokenizers/punkt')
     print("Punkt est accessible.")
