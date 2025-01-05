@@ -34,7 +34,7 @@ else:
     print(f"Le fichier {file_path} n'a pas été trouvé.")
     exit(1)
 
-df['tokens'] = df['question'].apply(word_tokenize)
+df['tokens'] = df['question'].apply(lambda x: word_tokenize(str(x)) if isinstance(x, str) else [])
 
 stop_words_english = set(stopwords.words('english'))
 stop_words_french = set(stopwords.words('french'))
