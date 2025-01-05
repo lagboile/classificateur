@@ -85,7 +85,6 @@ para_nb = {'alpha': [0.1, 0.5, 1.0]}
 grid_nb = GridSearchCV(MultinomialNB(), para_nb, cv=3)
 grid_nb.fit(X_train, y_train)
 
-
 from fuzzywuzzy import fuzz
 from nltk.chat.util import Chat, reflections
 
