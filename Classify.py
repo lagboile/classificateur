@@ -34,6 +34,12 @@ else:
     print(f"Le fichier {file_path} n'a pas été trouvé.")
     exit(1)
 
+try:
+    nltk.data.find('tokenizers/punkt')
+    print("La ressource 'punkt' est disponible.")
+except LookupError:
+    print("La ressource 'punkt' n'est pas trouvée.")
+
 df['tokens'] = df['question'].apply(lambda x: word_tokenize(str(x)) if isinstance(x, str) else [])
 
 stop_words_english = set(stopwords.words('english'))
