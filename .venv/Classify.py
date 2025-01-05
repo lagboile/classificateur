@@ -1,10 +1,10 @@
 import re
 import nltk
+from streamlit import button
 nltk.download('punkt', quiet=True)
 nltk.download('stopwords', quiet=True)
 nltk.download('wordnet', quiet=True)
 nltk.download('averaged_perceptron_tagger_eng', quiet=True)
-nltk.data.path.append('C:\\Users\\LENOVO\\nltk_data')
 import streamlit as st
 import pandas as pd
 import json
@@ -13,14 +13,6 @@ from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
 from nltk import pos_tag, SnowballStemmer
 from pathlib import Path
-
-try:
-    nltk.data.find('tokenizers/punkt')
-    print("Punkt est accessible.")
-except LookupError:
-    print("Punkt n'est pas accessible.")
-
-    nltk.download('punkt')
 
 script_dir = Path(__file__).parent
 
@@ -84,6 +76,7 @@ para_nb = {'alpha': [0.1, 0.5, 1.0]}
 grid_nb = GridSearchCV(MultinomialNB(), para_nb, cv=3)
 grid_nb.fit(X_train, y_train)
 
+
 from fuzzywuzzy import fuzz
 from nltk.chat.util import Chat, reflections
 
@@ -130,11 +123,12 @@ if user_input:
 
     user_input = re.sub(r'[^\w\s]', '', user_input.lower())
 
-    category = get_category(user_input)
+    if st.button("Enter"):
+        category = get_category(user_input)
 
-    if category:
+        if category:
             st.write(f"le service concerne est: {category} ")
-    else :
+        else :
             st.write("Chatbot: Sorry, I don't understand your question..")
 
 
